@@ -481,14 +481,18 @@ CREATE TABLE IF NOT EXISTS `branch` (
   FOREIGN KEY (`companyId`) REFERENCES `company`(`companyId`) ON DELETE CASCADE
 );
 
-CREATE TABLE `Role` (
-  `Role ID` PK,
-  `Branch ID` FK,
-  `Title` VARCHAR(255),
-  `Remuneration` DECIMAL(10,2),
-  `Remuneration Cycle` ENUM,
-  `Slots` SMALLINT,
-  FOREIGN KEY (`Branch ID`) REFERENCES `Branch`(`Branch ID`)
+CREATE TABLE IF NOT EXISTS `role` (
+  `roleId` BIGINT AUTO_INCREMENT PRIMARY KEY,
+  `branchId` BIGINT NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `remuneration` DECIMAL(10,2),
+  `remunerationCycle` ENUM(
+    'PER TASK', 'HOURLY', 'DAILY', 'WEEKLY',
+    'BI-WEEKLY', 'SEMI-MONTHLY', 'MONTHLY', 'YEARLY'
+  ),
+  `slots` SMALLINT NOT NULL DEFAULT 1,
+  FOREIGN KEY (`branchId`) REFERENCES `branch`(`branchId`) ON DELETE CASCADE,
+  CONSTRAINT checkRemuneration CHECK (`remuneration` IS NULL = `remunerationCycle` IS NULL)
 );
 
 CREATE TABLE `Tag` (
