@@ -472,13 +472,13 @@ CREATE TABLE IF NOT EXISTS `company` (
   FOREIGN KEY (`logoId`) REFERENCES `file`(`fileId`) ON DELETE SET NULL
 );
 
-CREATE TABLE `Branch` (
-  `Branch ID` PK,
-  `Company ID` FK,
-  `Name` VARCHAR(255),
-  `Address` TEXT,
-  `Phone` BIGINT,
-  FOREIGN KEY (`Company ID`) REFERENCES `Company`(`Company ID`)
+CREATE TABLE IF NOT EXISTS `branch` (
+  `branchId` BIGINT AUTO_INCREMENT PRIMARY KEY,
+  `companyId` BIGINT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `address` TEXT NOT NULL,
+  `phone` BIGINT,
+  FOREIGN KEY (`companyId`) REFERENCES `company`(`companyId`) ON DELETE CASCADE
 );
 
 CREATE TABLE `Role` (
