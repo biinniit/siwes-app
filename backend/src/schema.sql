@@ -1,6 +1,6 @@
 /* DB definition & manipulation history */
 
-CREATE TABLE `file` (
+CREATE TABLE IF NOT EXISTS `file` (
   `fileId` BIGINT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(100) NOT NULL,
   `mimeType` ENUM(
@@ -464,11 +464,12 @@ CREATE TABLE `file` (
   `content` BLOB NOT NULL
 );
 
-CREATE TABLE `company` (
+CREATE TABLE IF NOT EXISTS `company` (
   `companyId` BIGINT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(255) NOT NULL,
-  `logoId` FK,
-  `Website` TEXT
+  `logoId` BIGINT,
+  `website` TEXT,
+  FOREIGN KEY (`logoId`) REFERENCES `file`(`fileId`) ON DELETE SET NULL
 );
 
 CREATE TABLE `Branch` (
