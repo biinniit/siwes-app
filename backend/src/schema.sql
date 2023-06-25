@@ -495,9 +495,9 @@ CREATE TABLE IF NOT EXISTS `role` (
   CONSTRAINT checkRemuneration CHECK (`remuneration` IS NULL = `remunerationCycle` IS NULL)
 );
 
-CREATE TABLE `Tag` (
-  `Tag ID` PK,
-  `Name` VARCHAR(255)
+CREATE TABLE IF NOT EXISTS `tag` (
+  `tagId` BIGINT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `Role Tag` (
