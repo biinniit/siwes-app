@@ -500,11 +500,12 @@ CREATE TABLE IF NOT EXISTS `tag` (
   `name` VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE `Role Tag` (
-  `Tag ID` FK,
-  `Role ID` FK,
-  FOREIGN KEY (`Role ID`) REFERENCES `Role`(`Role ID`),
-  FOREIGN KEY (`Tag ID`) REFERENCES `Tag`(`Tag ID`)
+CREATE TABLE IF NOT EXISTS `role_tag` (
+  `tagId` BIGINT NOT NULL,
+  `roleId` BIGINT NOT NULL,
+  FOREIGN KEY (`tagId`) REFERENCES `tag`(`tagId`) ON DELETE CASCADE,
+  FOREIGN KEY (`roleId`) REFERENCES `role`(`roleId`) ON DELETE CASCADE,
+  CONSTRAINT uniqueRoleTag UNIQUE (`tagId`, `roleId`)
 );
 
 CREATE TABLE `Program` (
