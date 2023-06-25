@@ -508,9 +508,9 @@ CREATE TABLE IF NOT EXISTS `role_tag` (
   CONSTRAINT uniqueRoleTag UNIQUE (`tagId`, `roleId`)
 );
 
-CREATE TABLE `Program` (
-  `Program ID` PK,
-  `Title` VARCHAR(255)
+CREATE TABLE IF NOT EXISTS `program` (
+  `programId` BIGINT AUTO_INCREMENT PRIMARY KEY,
+  `title` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `Student` (
