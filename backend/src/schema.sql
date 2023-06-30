@@ -539,8 +539,10 @@ CREATE TABLE IF NOT EXISTS `application` (
   CONSTRAINT uniqueApplication UNIQUE (`studentId`, `roleId`)
 );
 
-CREATE TABLE `Company Image` (
-  `Image ID` FK,
-  `Company ID` FK,
-  FOREIGN KEY (`Company ID`) REFERENCES `Company`(`Company ID`)
+CREATE TABLE IF NOT EXISTS `company_image` (
+  `imageId` BIGINT NOT NULL,
+  `companyId` BIGINT NOT NULL,
+  FOREIGN KEY (`imageId`) REFERENCES `file`(`fileId`) ON DELETE CASCADE,
+  FOREIGN KEY (`companyId`) REFERENCES `company`(`companyId`) ON DELETE CASCADE,
+  CONSTRAINT uniqueCompanyImage UNIQUE (`imageId`, `companyId`)
 );
