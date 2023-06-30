@@ -508,25 +508,27 @@ CREATE TABLE IF NOT EXISTS `role_tag` (
   CONSTRAINT uniqueRoleTag UNIQUE (`tagId`, `roleId`)
 );
 
+/* program of study */
 CREATE TABLE IF NOT EXISTS `program` (
   `programId` BIGINT AUTO_INCREMENT PRIMARY KEY,
   `title` VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE `Student` (
-  `Student ID` PK,
-  `First Name` VARCHAR(100),
-  `Middle Name` VARCHAR(100),
-  `Last Name` VARCHAR(100),
-  `Email` VARCHAR(255),
-  `Password Hash` BINARY(32),
-  `Phone` BIGINT,
-  `Program ID` FK,
-  `Address` TEXT,
-  `Profile Picture ID` FK,
-  `Resume ID` FK,
-  FOREIGN KEY (`Program ID`) REFERENCES `Program`(`Program ID`),
-  FOREIGN KEY (`File ID`) REFERENCES `Student`(`Profile Picture ID`)
+CREATE TABLE IF NOT EXISTS `student` (
+  `studentId` BIGINT AUTO_INCREMENT PRIMARY KEY,
+  `firstName` VARCHAR(100) NOT NULL,
+  `middleName` VARCHAR(100),
+  `lastName` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(255) UNIQUE NOT NULL,
+  `passwordHash` BINARY(32) NOT NULL,
+  `phone` BIGINT,
+  `programId` BIGINT NOT NULL,
+  `address` TEXT,
+  `profilePictureId` BIGINT NOT NULL,
+  `resumeId` BIGINT NOT NULL,
+  FOREIGN KEY (`programId`) REFERENCES `program`(`programId`),
+  FOREIGN KEY (`profilePictureId`) REFERENCES `file`(`fileId`),
+  FOREIGN KEY (`resumeId`) REFERENCES `file`(`fileId`)
 );
 
 CREATE TABLE `Application` (
