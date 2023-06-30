@@ -1,4 +1,5 @@
 /* DB definition & manipulation history */
+/* DB name: siwes_app */
 
 CREATE TABLE IF NOT EXISTS `file` (
   `fileId` BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -546,3 +547,14 @@ CREATE TABLE IF NOT EXISTS `company_image` (
   FOREIGN KEY (`companyId`) REFERENCES `company`(`companyId`) ON DELETE CASCADE,
   CONSTRAINT uniqueCompanyImage UNIQUE (`imageId`, `companyId`)
 );
+
+IF EXISTS (
+  SELECT `table_name` FROM `information_schema`.`tables`
+  WHERE `table_schema` = 'siwes_app'
+  AND `table_name` = 'student')
+THEN
+  ALTER TABLE `student`
+    DROP FOREIGN KEY `student_ibfk_3`, /* foreign key for "resumeId" column */
+    MODIFY `resumeId` BIGINT,
+    ADD FOREIGN KEY (`resumeId`) REFERENCES `file`(`fileId`) ON DELETE SET NULL;
+END IF;
