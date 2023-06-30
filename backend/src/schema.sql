@@ -531,11 +531,12 @@ CREATE TABLE IF NOT EXISTS `student` (
   FOREIGN KEY (`resumeId`) REFERENCES `file`(`fileId`)
 );
 
-CREATE TABLE `Application` (
-  `Student ID` FK,
-  `Role ID` FK,
-  FOREIGN KEY (`Role ID`) REFERENCES `Role`(`Role ID`),
-  FOREIGN KEY (`Student ID`) REFERENCES `Student`(`Student ID`)
+CREATE TABLE IF NOT EXISTS `application` (
+  `studentId` BIGINT NOT NULL,
+  `roleId` BIGINT NOT NULL,
+  FOREIGN KEY (`studentId`) REFERENCES `student`(`studentId`) ON DELETE CASCADE,
+  FOREIGN KEY (`roleId`) REFERENCES `role`(`roleId`) ON DELETE CASCADE,
+  CONSTRAINT uniqueApplication UNIQUE (`studentId`, `roleId`)
 );
 
 CREATE TABLE `Company Image` (
