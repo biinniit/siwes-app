@@ -12,6 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Doctrine\DBAL doesn't support SQL enums
         DB::statement('ALTER TABLE file MODIFY mimeType ENUM(
             \'application/vnd.lotus-1-2-3\',
             \'text/vnd.in3d.3dml\',

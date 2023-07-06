@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\File;
+use App\Models\Company;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class FileSeeder extends Seeder
+class CompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        File::factory()->times(10)->create();
+        Company::factory()->times(3)->create();
     }
 }
