@@ -17,7 +17,9 @@ class FileFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->uuid() . $this->faker->fileExtension(),
+            'mimeType' => 'image/png',
+            'content' => file_get_contents($this->faker->image(null, 640, 480))
         ];
     }
 }
