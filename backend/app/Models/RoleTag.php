@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class RoleTag extends Model
 {
     use HasFactory;
 
-    protected $table = 'role';
+    protected $table = 'role_tag';
 
     public $timestamps = false;
 
-    public function roleTag()
+    public function role()
     {
-        return $this->hasMany(RoleTag::class, 'roleId');
+        return $this->belongsTo(Role::class);
     }
 }

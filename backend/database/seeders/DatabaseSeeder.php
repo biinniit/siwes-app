@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         File::factory(10)->create();
         Company::factory(3)->create();
         Branch::factory(5)->create();
-        Role::factory(10)->create();
+        Role::factory(10)->hasRoleTag(3)->create();
         Tag::factory(15)->create();
     }
 }
