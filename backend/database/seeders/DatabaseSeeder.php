@@ -8,6 +8,7 @@ use App\Models\Branch;
 use App\Models\Company;
 use App\Models\File;
 use App\Models\Role;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,5 +24,6 @@ class DatabaseSeeder extends Seeder
         Company::factory(3)->create();
         Branch::factory(5)->create();
         Role::factory(10)->create();
+        Tag::factory(15)->create();
     }
 }
