@@ -18,7 +18,9 @@ class RoleTagFactory extends Factory
     public function definition(): array
     {
         return [
-            'tagId' => $this->faker->unique($reset = true)->randomElement(Tag::inRandomOrder()->pluck('tagId'))
+            'tagId' => $this->faker
+                ->unique($reset = true)
+                ->randomElement(Tag::inRandomOrder()->pluck('tagId'))
         ];
     }
 }
