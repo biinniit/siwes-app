@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class CompanyImage extends Model
 {
     use HasFactory;
 
-    protected $table = 'company';
+    protected $table = 'company_image';
 
     public $timestamps = false;
 
-    public function companyImage()
+    public function company()
     {
-        return $this->hasMany(CompanyImage::class, 'companyId');
+        return $this->belongsTo(Company::class);
     }
 }
