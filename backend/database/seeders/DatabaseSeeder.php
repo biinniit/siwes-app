@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         // This is the recommended seed order, because of the relationships
-        File::factory(10)->create();
+        File::factory(20)->create();
         Company::factory(3)->create();
         Branch::factory(5)->create();
         Role::factory(10)->hasRoleTag(3)->create();

@@ -19,7 +19,7 @@ class CompanyFactory extends Factory
     {
         return [
             'name' => $this->faker->company(),
-            'logoId' => File::inRandomOrder()->first()->fileId,
+            'logoId' => File::where('mimeType', 'LIKE', 'image/%')->inRandomOrder()->first()->fileId,
             'website' => $this->faker->url()
         ];
     }

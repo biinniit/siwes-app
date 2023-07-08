@@ -13,6 +13,6 @@ class FileSeeder extends Seeder
      */
     public function run(): void
     {
-        File::factory()->times(10)->create();
+        File::factory()->times(20)->create();
     }
 }
