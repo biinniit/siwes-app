@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\File;
 use App\Models\Program;
 use App\Models\Role;
+use App\Models\Student;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
@@ -28,5 +29,6 @@ class DatabaseSeeder extends Seeder
         Role::factory(10)->hasRoleTag(3)->create();
         Tag::factory(15)->create();
         Program::factory(10)->create();
+        Student::factory(30)->create();
     }
 }
