@@ -17,4 +17,9 @@ class Role extends Model
     {
         return $this->hasMany(RoleTag::class, 'roleId');
     }
+
+    public function application()
+    {
+        return $this->hasMany(Application::class, 'roleId');
+    }
 }

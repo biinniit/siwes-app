@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Tag;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\RoleTag>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Application>
  */
-class RoleTagFactory extends Factory
+class ApplicationFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class RoleTagFactory extends Factory
     public function definition(): array
     {
         return [
-            'tagId' => Tag::inRandomOrder()->first()->tagId
+            'studentId' => Student::inRandomOrder()->first()->studentId
         ];
     }
 }
