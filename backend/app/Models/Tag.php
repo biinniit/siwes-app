@@ -11,5 +11,7 @@ class Tag extends Model
 
     protected $table = 'tag';
 
+    protected $primaryKey = 'tagId';
+
     public $timestamps = false;
 }
