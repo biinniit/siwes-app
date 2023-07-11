@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\StudentCollection;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -12,7 +14,13 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = DB::table('student')
+            ->join('program', 'program.programId', '=', 'student.programId')
+            ->select('studentId', 'firstName', 'middleName', 'lastName', 'email', 'phone', 'student.programId', 'program.title AS programTitle', 'address')
+            ->get()
+            ->all();
+        
+        return new StudentCollection(Student::hydrate($students));
     }
 
     /**

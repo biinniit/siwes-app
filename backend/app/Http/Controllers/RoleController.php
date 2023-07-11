@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RoleCollection;
+use App\Models\Branch;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -10,9 +12,17 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Branch $branch)
     {
-        //
+        $roles = Role::where('branchId', $branch->branchId)
+            ->get();
+        $roles->map(function ($role) use ($branch) {
+            $role->remuneration = +$role->remuneration;
+            $role->companyId = $branch->companyId;
+            return $role;
+        });
+
+        return new RoleCollection($roles);
     }
 
     /**
