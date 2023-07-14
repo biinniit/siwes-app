@@ -16,6 +16,8 @@ class Program extends Model
 
     public $timestamps = false;
 
+    protected $fillable = ['title'];
+
     public function student(): HasMany
     {
         return $this->hasMany(Student::class, 'programId');

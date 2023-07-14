@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\BranchCollection;
+use App\Http\Resources\BranchResource;
 use App\Models\Branch;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -23,9 +24,14 @@ class BranchController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Company $company)
     {
-        //
+        $request->merge(['companyId' => $company->companyId]);
+        $branch = Branch::create($request->only([
+            'companyId', 'name', 'address', 'phone'
+        ]));
+
+        return new BranchResource($branch);
     }
 
     /**

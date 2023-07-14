@@ -17,6 +17,8 @@ class Branch extends Model
 
     public $timestamps = false;
 
+    protected $fillable = ['companyId', 'name', 'address', 'phone'];
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'companyId');

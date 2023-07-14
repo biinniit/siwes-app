@@ -14,4 +14,6 @@ class Tag extends Model
     protected $primaryKey = 'tagId';
 
     public $timestamps = false;
+
+    protected $fillable = ['name'];
 }

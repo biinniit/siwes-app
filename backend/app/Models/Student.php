@@ -16,6 +16,8 @@ class Student extends Model
 
     public $timestamps = false;
 
+    protected $guarded = ['passwordHash', 'profilePictureId', 'resumeId'];
+
     public function program(): BelongsTo
     {
         return $this->belongsTo(Program::class, 'programId');

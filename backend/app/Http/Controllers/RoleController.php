@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\RoleCollection;
+use App\Http\Resources\RoleResource;
 use App\Models\Branch;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -28,9 +29,14 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Branch $branch)
     {
-        //
+        $request->merge(['branchId' => $branch->branchId]);
+        $role = Role::create($request->only([
+            'branchId', 'title', 'remuneration', 'remunerationCycle', 'slots'
+        ]));
+
+        return new RoleResource($role);
     }
 
     /**

@@ -17,6 +17,8 @@ class Company extends Model
 
     public $timestamps = false;
 
+    protected $guarded = ['logoId'];
+
     public function logo(): BelongsTo
     {
         return $this->belongsTo(File::class, 'logoId');

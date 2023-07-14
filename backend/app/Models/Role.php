@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Enums\RemunerationCycle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,12 @@ class Role extends Model
     protected $primaryKey = 'roleId';
 
     public $timestamps = false;
+
+    protected $fillable = ['branchId', 'title', 'remuneration', 'remunerationCycle', 'slots'];
+
+    protected $casts = [
+        'remunerationCycle' => RemunerationCycle::class
+    ];
 
     public function branch(): BelongsTo
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ProgramCollection;
+use App\Http\Resources\ProgramResource;
 use App\Models\Program;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,9 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $program = Program::create($request->only(['title']));
+
+        return new ProgramResource($program);
     }
 
     /**
