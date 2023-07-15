@@ -17,11 +17,6 @@ class RoleController extends Controller
     {
         $roles = Role::where('branchId', $branch->branchId)
             ->get();
-        $roles->map(function ($role) use ($branch) {
-            $role->remuneration = +$role->remuneration;
-            $role->companyId = $branch->companyId;
-            return $role;
-        });
 
         return new RoleCollection($roles);
     }
