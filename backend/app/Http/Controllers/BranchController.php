@@ -39,7 +39,7 @@ class BranchController extends Controller
      */
     public function show(Branch $branch)
     {
-        //
+        return new BranchResource($branch);
     }
 
     /**
