@@ -42,7 +42,9 @@ class ProgramController extends Controller
      */
     public function update(Request $request, Program $program)
     {
-        //
+        $program->update($request->only(['title']));
+
+        return new ProgramResource($program);
     }
 
     /**

@@ -62,7 +62,18 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        // TODO: implement reset password functionality
+        $student->update([
+            'firstName' => $request->input('firstName') ?? $student->firstName,
+            'middleName' => $request->has('middleName') ? $request->input('middleName') : $student->middleName,
+            'lastName' => $request->input('lastName') ?? $student->lastName,
+            'email' => $request->input('email') ?? $student->email,
+            'phone' => $request->has('phone') ? $request->input('phone') : $student->phone,
+            'programId' => $request->has('programId') ? $request->input('programId') : $student->programId,
+            'address' => $request->has('address') ? $request->input('address') : $student->address
+        ]);
+
+        return new StudentResource($student);
     }
 
     /**

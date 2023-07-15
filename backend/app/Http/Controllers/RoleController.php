@@ -47,7 +47,11 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $role->update($request->only([
+            'title', 'remuneration', 'remunerationCycle', 'slots'
+        ]));
+
+        return new RoleResource($role);
     }
 
     /**

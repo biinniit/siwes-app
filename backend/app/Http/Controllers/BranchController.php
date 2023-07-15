@@ -47,7 +47,11 @@ class BranchController extends Controller
      */
     public function update(Request $request, Branch $branch)
     {
-        //
+        $branch->update($request->only([
+            'name', 'address', 'phone'
+        ]));
+
+        return new BranchResource($branch);
     }
 
     /**

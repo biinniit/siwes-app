@@ -44,7 +44,11 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $company->update($request->only([
+            'name', 'website'
+        ]));
+
+        return new CompanyResource($company);
     }
 
     /**
