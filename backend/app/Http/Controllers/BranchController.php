@@ -7,6 +7,7 @@ use App\Http\Resources\BranchResource;
 use App\Models\Branch;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BranchController extends Controller
 {
@@ -59,6 +60,8 @@ class BranchController extends Controller
      */
     public function destroy(Branch $branch)
     {
-        //
+        $branch->delete();
+
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

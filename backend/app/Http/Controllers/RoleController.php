@@ -7,6 +7,7 @@ use App\Http\Resources\RoleResource;
 use App\Models\Branch;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class RoleController extends Controller
 {
@@ -59,6 +60,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Resources\ProgramCollection;
 use App\Http\Resources\ProgramResource;
 use App\Models\Program;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProgramController extends Controller
 {
@@ -52,6 +53,8 @@ class ProgramController extends Controller
      */
     public function destroy(Program $program)
     {
-        //
+        $program->delete();
+
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
