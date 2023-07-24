@@ -8,6 +8,7 @@ use App\Models\Application;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\CompanyImage;
+use App\Models\CompanyUser;
 use App\Models\File;
 use App\Models\Program;
 use App\Models\Role;
@@ -30,7 +31,9 @@ class DatabaseSeeder extends Seeder
 
         // This is the recommended seed order, because of the relationships
         File::factory(20)->create();
-        Company::factory(3)->create();
+        Company::factory(3)
+            ->has(CompanyUser::factory(1), 'companyUser')
+            ->create();
         CompanyImage::factory(15)->create(); // must be <= number of files - number of resumes
         Branch::factory(5)->create();
         Tag::factory(15)->create();

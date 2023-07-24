@@ -33,4 +33,9 @@ class Company extends Model
     {
         return $this->hasMany(CompanyImage::class, 'companyId');
     }
+
+    public function companyUser(): HasMany
+    {
+        return $this->hasMany(CompanyUser::class, 'companyId');
+    }
 }
