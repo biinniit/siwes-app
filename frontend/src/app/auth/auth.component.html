@@ -1,0 +1,10 @@
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <h2>Login to SIWES App</h2>
+
+  <label for="input-email">Email: </label>
+  <input id="input-email" type="email" formControlName="email">
+  <label for="input-password">Password: </label>
+  <input id="input-password" type="password" formControlName="password">
+
+  <button id="button-submit" type="submit" [disabled]="!loginForm.valid">Login</button>
+</form>
