@@ -1,0 +1,21 @@
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <h2>Login to SIWES App</h2>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input type="email" matInput placeholder="Ex. hansen.gianni@example.com" formControlName="email">
+    <mat-error *ngIf="loginForm.controls.email.hasError('email') && !loginForm.controls.email.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="loginForm.controls.email.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <label for="input-password">Password: </label>
+    <input id="input-password" type="password" formControlName="password">
+  </mat-form-field>
+
+  <button id="button-submit" type="submit" [disabled]="!loginForm.valid">Login</button>
+</form>
