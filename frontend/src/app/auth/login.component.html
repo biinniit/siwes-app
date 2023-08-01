@@ -1,21 +1,38 @@
-<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-  <h2>Login to SIWES App</h2>
-
-  <mat-form-field class="form-field-full-width">
-    <mat-label>Email</mat-label>
-    <input type="email" matInput formControlName="email" placeholder="Ex. hansen.gianni@example.com">
-    <mat-error *ngIf="loginForm.controls['email'].errors?.['email'] && !loginForm.controls['email'].errors?.['required']">
-      Please enter a valid email address
-    </mat-error>
-    <mat-error *ngIf="loginForm.controls['email'].errors?.['required']">
-      Email is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field>
-    <label for="input-password">Password: </label>
-    <input id="input-password" type="password" formControlName="password">
-  </mat-form-field>
-
-  <button id="button-submit" type="submit" [disabled]="!loginForm.valid">Login</button>
-</form>
+<div class="form-container">
+  <form [formGroup]="loginForm" novalidate (ngSubmit)="onLogin()">
+    <mat-card class="login-card">
+      <mat-card-header>
+        <mat-card-title>Login to SIWES App</mat-card-title>
+      </mat-card-header>
+    
+      <mat-card-content>
+        <mat-form-field class="form-field-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" placeholder="Ex. hansen.gianni@example.com">
+          <mat-error *ngIf="loginForm.controls['email'].hasError('email') && !loginForm.controls['email'].hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="form-field-full-width">
+          <mat-label>Password</mat-label>
+          <input [type]="hidePassword ? 'password' : 'text'" matInput formControlName="password" placeholder="Must be 6 or more characters">
+          <button *ngIf="loginForm.controls['password'].value" matSuffix mat-icon-button aria-label="Show" (click)="hidePassword = !hidePassword">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="(loginForm.controls['password'].value?.length ?? 0) < 6">
+            Must be 6 or more characters
+          </mat-error>
+        </mat-form-field>
+      
+        <button id="button-submit" type="submit" [disabled]="!loginForm.valid">Login</button>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
