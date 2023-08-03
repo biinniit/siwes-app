@@ -3,6 +3,8 @@ import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators
 import { Router } from '@angular/router';
 import { CustomErrorStateMatcher } from "@helpers/custom.error-state.matcher";
 import { AuthService } from '@services/auth.service';
+import { CustomTel } from '@models/custom-tel';
+import { CustomTelInput } from "@app/_components/custom-tel-input/custom-tel.input";
 
 @Component({
   selector: 'app-sign-up',
@@ -21,6 +23,7 @@ export class SignUpComponent {
     middleName: ['', Validators.maxLength(255)],
     lastName: ['', [Validators.required, Validators.maxLength(255)]],
     email: ['', [Validators.required, Validators.email]],
+    phone: [new CustomTel('', '', '')],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', Validators.required]
   }, {
@@ -40,13 +43,18 @@ export class SignUpComponent {
     return this.signUpForm.controls;
   }
 
+  phoneInvalid(): boolean {
+    return (this.f.phone as unknown as CustomTelInput).errorState;
+  }
+
   onSignUp(): void {
     this.authService.signup({
       firstName: this.f.firstName.value ?? undefined,
       middleName: this.f.middleName.value ?? undefined,
       lastName: this.f.lastName.value ?? undefined,
       email: this.f.email.value ?? undefined,
-      password: this.f.password.value ?? ''
+      password: this.f.password.value ?? '',
+      phone: this.f.phone.value?.asNumber()
     // TODO: change to CONFIRM_PATH when implementing email confirmation
     }).subscribe(() => this.router.navigate([this.authService.INITIAL_PATH]));
   }

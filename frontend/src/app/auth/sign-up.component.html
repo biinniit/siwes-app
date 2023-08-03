@@ -36,7 +36,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form-field-full-width">
+        <mat-form-field class="form-field-two-thirds-width">
           <mat-label>Email</mat-label>
           <input type="email" matInput formControlName="email" placeholder="Ex. hansen.gianni@example.com">
           <mat-error *ngIf="f['email'].hasError('email'); else checkRequired">
@@ -45,6 +45,15 @@
           <ng-template #checkRequired><mat-error *ngIf="f['email'].hasError('required')">
             Email is <strong>required</strong>
           </mat-error></ng-template>
+        </mat-form-field>
+
+        <mat-form-field class="form-field-third-width" floatLabel="always">
+          <mat-label>Phone Number</mat-label>
+          <span matTextPrefix>+234&nbsp;</span>
+          <custom-tel-input formControlName="phone"></custom-tel-input>
+          <mat-error *ngIf="phoneInvalid()">
+            Invalid phone number
+          </mat-error>
         </mat-form-field>
       
         <mat-form-field class="form-field-half-width">
