@@ -5,6 +5,10 @@ export interface User {
   email?: string;
 }
 
+export interface SignUpPassword {
+  password: string;
+}
+
 export interface CompanyUser extends User {
   companyId?: number;
 }

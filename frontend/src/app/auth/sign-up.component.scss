@@ -1,5 +1,31 @@
-@use '@angular/material' as mat;
+.form-container {
+  text-align: center;
+}
 
-@import '../../styles.scss';
+form {
+  min-width: 150px;
+  max-width: 750px;
+  width: 100%;
+  display: inline-block;
 
-@include mat.typography-hierarchy($fonts);
+  .sign-up-card {
+    min-width: 120px;
+    margin: 20px auto;
+  }
+
+  .form-field-full-width {
+    width: 100%;
+  }
+
+  .form-field-half-width {
+    width: 50%;
+  }
+
+  .form-field-third-width {
+    width: 33.33%;
+  }
+
+  .form-field-two-thirds-width {
+    width: 66.67%;
+  }
+}
