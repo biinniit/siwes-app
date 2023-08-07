@@ -1,6 +1,6 @@
 import { Subject } from "rxjs";
 import { Component, ElementRef, Inject, Input, OnDestroy, Optional, Self, ViewChild } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, NgControl, Validators } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, NgControl, ValidationErrors, Validator, Validators } from '@angular/forms';
 import { MAT_FORM_FIELD, MatFormField, MatFormFieldControl } from '@angular/material/form-field';
 import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { FocusMonitor } from "@angular/cdk/a11y";
@@ -17,7 +17,7 @@ import { CustomTel } from "@models/custom-tel";
     '[id]': 'id',
   }
 })
-export class CustomTelInput implements ControlValueAccessor, MatFormFieldControl<CustomTel>, OnDestroy {
+export class CustomTelInput implements ControlValueAccessor, MatFormFieldControl<CustomTel>, OnDestroy, Validator {
   static nextId = 0;
   @ViewChild('area') areaInput!: HTMLInputElement;
   @ViewChild('exchange') exchangeInput!: HTMLInputElement;
@@ -195,5 +195,25 @@ export class CustomTelInput implements ControlValueAccessor, MatFormFieldControl
   _handleInput(control: AbstractControl, nextElement?: HTMLInputElement): void {
     this.autoFocusNext(control, nextElement);
     this.onChange(this.value);
+  }
+
+  validate(control: AbstractControl<any, any>): ValidationErrors | null {
+    if(this.parts.valid) return null;
+
+    let errors: ValidationErrors = {};
+    errors = this.addControlErrors(errors, 'area');
+    errors = this.addControlErrors(errors, 'exchange');
+    errors = this.addControlErrors(errors, 'subscriber');
+    return errors;
+  }
+
+  addControlErrors(allErrors: any, controlName: 'area' | 'exchange' | 'subscriber') {
+    const errors = {...allErrors};
+    const controlErrors = this.parts.controls[controlName].errors;
+
+    if (controlErrors) {
+      errors[controlName] = controlErrors;
+    }
+    return errors;
   }
 }

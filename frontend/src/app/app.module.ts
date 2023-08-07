@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material.module';
@@ -38,6 +38,11 @@ import { authStrategyProvider } from '@services/auth.strategy';
     authStrategyProvider,
     {
       provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: CustomTelInput
+    },
+    {
+      provide: NG_VALIDATORS,
       multi: true,
       useExisting: CustomTelInput
     }
