@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => 'bcrypt',
+    'driver' => 'sha256', // custom hasher, see App\Providers\AppServiceProvider
 
     /*
     |--------------------------------------------------------------------------

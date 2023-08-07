@@ -3,6 +3,7 @@
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
@@ -23,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('auth')->group(function() {
+    Route::post('/login', [LoginController::class, 'authenticate']);
 });
 
 Route::controller(FileController::class)->group(function() {

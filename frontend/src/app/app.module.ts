@@ -1,19 +1,19 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from './material.module';
-import { MatFormFieldControl } from '@angular/material/form-field';
-
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home';
-import { LoginComponent, SignUpComponent } from './auth';
 import { CustomTelInput } from '@components/custom-tel-input/custom-tel.input';
+import { CookieInterceptor } from '@helpers/cookie.interceptor';
 import { authStrategyProvider } from '@services/auth.strategy';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LoginComponent, SignUpComponent } from './auth';
+import { HomeComponent } from './home';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +45,11 @@ import { authStrategyProvider } from '@services/auth.strategy';
       provide: NG_VALIDATORS,
       multi: true,
       useExisting: CustomTelInput
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: CookieInterceptor
     }
   ],
   bootstrap: [AppComponent]

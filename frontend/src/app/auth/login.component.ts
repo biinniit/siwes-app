@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '@services/auth.service';
 import { LoginRequest } from '@models/login-request';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +33,9 @@ export class LoginComponent {
     };
 
     this.authService.login(loginRequest)
-      .subscribe(user => this.router.navigate([this.authService.INITIAL_PATH]));
+      .subscribe(user => {
+        console.log('Logged in user:', user);
+        this.router.navigate([this.authService.INITIAL_PATH]);
+      });
   }
 }
