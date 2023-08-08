@@ -23,9 +23,10 @@ export class AuthService {
     @Inject(AUTH_STRATEGY) private auth: AuthStrategy<any>
   ) { }
 
-  signup(user: Student & SignUpPassword): Observable<void> {
+  signup(user: Student & SignUpPassword): Observable<User> {
     return this.initCsrfProtection()
-      .pipe(switchMap(() => this.http.post<any>(`${config.authUrl}/signup`, user)));
+      .pipe(switchMap(() => this.http.post<any>(`${config.authUrl}/sign-up`, user)))
+      .pipe(tap(data => this.auth.doLoginUser(data)));
   }
 
   // confirm(email: string, code: string): Observable<void> {

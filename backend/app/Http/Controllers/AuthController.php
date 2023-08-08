@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CreateStudent;
 use App\Http\Resources\CompanyUserResource;
 use App\Http\Resources\StudentResource;
 use App\Models\CompanyUser;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
+    use CreateStudent;
+
     /**
      * Handle an authentication attempt.
      */
@@ -47,5 +51,33 @@ class LoginController extends Controller
             'code' => Response::HTTP_UNAUTHORIZED,
             'message' => 'The provided credentials do not match our records.'
         ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * Sign a student up.
+     */
+    public function signUp(Request $request)
+    {
+        $this->createStudent($request);
+        return $this->authenticate($request);
+    }
+
+    /**
+     * Get currently authenticated user.
+     */
+    public function getUser()
+    {
+        $user = Auth::user();
+        if($user->getAuthIdentifierName() === App::make('Student')->getKeyName()) {
+            return new StudentResource($user);
+        } else if($user->getAuthIdentifierName() === App::make('CompanyUser')->getKeyName()) {
+            return new CompanyUserResource($user);
+        }
+
+        Log::error('Currently authenticated user not found');
+        return response()->json([
+            'code' => Response::HTTP_NOT_FOUND,
+            'message' => 'Currently authenticated user not found.'
+        ], Response::HTTP_NOT_FOUND);
     }
 }
