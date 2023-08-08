@@ -7,6 +7,7 @@ import { Observable, of, switchMap } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 
 import { AUTH_STRATEGY, AuthStrategy } from "./auth.strategy";
+import { SessionAuthStrategy } from "./session-auth.strategy";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthService {
   
   public readonly LOGIN_PATH = '/login';
   // public readonly CONFIRM_PATH = '/confirm';
-  public readonly INITIAL_PATH = '/app/dashboard';
+  public readonly INITIAL_PATH = '/';
 
   constructor(
     private router: Router,
@@ -49,10 +50,12 @@ export class AuthService {
   }
 
   isLoggedIn$(): Observable<boolean> {
-    return this.auth.getCurrentUser().pipe(
-      map(user => !!user),
-      catchError(() => of(false))
-    );
+    return this.auth instanceof SessionAuthStrategy
+      ? this.auth.isLoggedIn
+      : this.auth.getCurrentUser().pipe(
+        map(user => !!user),
+        catchError(() => of(false))
+      );
   }
 
   getCurrentUser$(): Observable<User> {

@@ -22,7 +22,7 @@ class AuthController extends Controller
      */
     public function authenticate(Request $request)
     {
-        Log::debug('LoginController is called');
+        Log::debug('AuthController is called');
 
         $credentials = $request->validate([
             'email' => ['required', 'email', 'max:255'],
@@ -79,5 +79,18 @@ class AuthController extends Controller
             'code' => Response::HTTP_NOT_FOUND,
             'message' => 'Currently authenticated user not found.'
         ], Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * Log the user out of the application.
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        Log::debug('AuthController::logout called');
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

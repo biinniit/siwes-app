@@ -8,7 +8,6 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TagController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +26,7 @@ Route::prefix('auth')->group(function() {
         Route::post('/login', 'authenticate');
         Route::post('/sign-up', 'signUp');
         Route::get('/user', 'getUser')->middleware('auth');
+        Route::get('/logout', 'logout')->middleware('auth');
     });
 });
 
