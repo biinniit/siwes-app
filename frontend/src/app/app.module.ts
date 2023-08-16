@@ -6,9 +6,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { CustomTelInput } from '@components/custom-tel-input/custom-tel.input';
-import { CookieInterceptor } from '@helpers/cookie.interceptor';
 import { authStrategyProvider } from '@services/auth.strategy';
 
+import { CookieInterceptor, ErrorInterceptor } from './_helpers';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent, SignUpComponent } from './auth';
@@ -50,6 +50,11 @@ import { MaterialModule } from './material.module';
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: CookieInterceptor
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: ErrorInterceptor
     }
   ],
   bootstrap: [AppComponent]
