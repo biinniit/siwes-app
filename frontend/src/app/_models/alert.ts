@@ -1,5 +1,4 @@
 export interface Alert {
-  id?: string;
   type?: AlertType;
   message?: string;
   autoClose?: boolean;
@@ -15,7 +14,6 @@ export enum AlertType {
 }
 
 export interface AlertOptions {
-  id?: string;
   autoClose?: boolean;
   keepAfterRouteChange?: boolean;
 }
