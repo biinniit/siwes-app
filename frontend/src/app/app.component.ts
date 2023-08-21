@@ -33,7 +33,10 @@ export class AppComponent {
 
     this.alertService.onAlert().subscribe(x => {
       this.alert = x;
-      if(x) this.showAlert(); // if the alert "x" is not null
+      if(x)
+        this.showAlert(); // if the alert "x" is not null
+      else
+        this._snackBar._openedSnackBarRef?.dismiss();
     });
 
     // clear alert messages on route change unless 'keepAfterRouteChange' flag is true
