@@ -1,6 +1,6 @@
 export interface Alert {
-  type?: AlertType;
-  message?: string;
+  type: AlertType;
+  message: string;
   autoClose?: boolean;
   keepAfterRouteChange?: boolean;
   fade?: boolean;

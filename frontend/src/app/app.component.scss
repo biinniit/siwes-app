@@ -8,3 +8,21 @@
 .mat-button {
   @include mat.typography-level($fonts, 'button');
 }
+
+// Alerts
+.alert-success {
+  background: mat.get-color-from-palette($theme-primary, 'lighter');
+  color: mat.get-color-from-palette($theme-primary, 'text');
+}
+.alert-error {
+  background: mat.get-color-from-palette(mat.$red-palette, 'lighter');
+  color: mat.get-color-from-palette(mat.$red-palette, 'text');
+}
+.alert-info {
+  background: mat.get-color-from-palette(mat.$grey-palette, 'lighter');
+  color: mat.get-color-from-palette(mat.$grey-palette, 'text');
+}
+.alert-warn {
+  background: mat.get-color-from-palette($theme-warn, 'lighter');
+  color: mat.get-color-from-palette($theme-warn, 'text');
+}
