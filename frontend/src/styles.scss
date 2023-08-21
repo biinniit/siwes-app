@@ -179,3 +179,26 @@ $altTheme: mat.define-dark-theme(
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   }
 }
+
+// Alerts, use default styling for .alert-info
+// This is a workaround, pending when the proper Angular Material API is ready
+// https://github.com/angular/components/issues/26928#issuecomment-1533422940
+.alert-success {
+  --mdc-snackbar-container-color: #{map-get($theme-primary, 50)} !important;
+  --mdc-snackbar-supporting-text-color: #{map-get($theme-primary, 900)} !important;
+  --mat-snack-bar-button-color: #{map-get($theme-primary, 900)} !important;
+  white-space: pre-wrap;
+}
+$theme-mat-red: mat.define-palette(mat.$red-palette);
+.alert-error {
+  --mdc-snackbar-container-color: #{map-get($theme-mat-red, 800)} !important;
+  --mdc-snackbar-supporting-text-color: #{map-get($theme-mat-red, 50)} !important;
+  --mat-snack-bar-button-color: #{map-get($theme-mat-red, 50)} !important;
+  white-space: pre-wrap;
+}
+.alert-warn {
+  --mdc-snackbar-container-color: #{map-get($theme-warn, 900)} !important;
+  --mdc-snackbar-supporting-text-color: #{map-get($theme-warn, 50)} !important;
+  --mat-snack-bar-button-color: #{map-get($theme-warn, 50)} !important;
+  white-space: pre-wrap;
+}
