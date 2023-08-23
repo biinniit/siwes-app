@@ -2,12 +2,14 @@
 <nav *ngIf="isLoggedIn; else notLoggedIn">
   <mat-toolbar color="primary" class="mat-button">
     <a mat-flat-button routerLink="/" color="primary">Dashboard</a>
+    <span class="spacer"></span>
     <button mat-flat-button color="primary" (click)="logout()">Logout</button>
   </mat-toolbar>
 </nav>
 <ng-template #notLoggedIn><nav>
   <mat-toolbar color="primary" class="mat-button">
-    <a mat-flat-button routerLink="/" color="primary">Home</a>
+    <img src="../assets/logo.svg" class="head-logo" (click)="goHome()">
+    <span class="spacer"></span>
     <a mat-flat-button routerLink="/account/login" color="primary">Login</a>
     <a mat-flat-button routerLink="/account/sign-up" color="primary">Sign Up</a>
   </mat-toolbar>

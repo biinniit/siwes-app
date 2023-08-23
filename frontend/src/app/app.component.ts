@@ -66,6 +66,10 @@ export class AppComponent {
     snackBarRef.afterDismissed().subscribe(() => this.alertService.clear());
   }
 
+  goHome() {
+    this.router.navigateByUrl('/');
+  }
+
   logout() {
     this.authService.logout().subscribe();
   }

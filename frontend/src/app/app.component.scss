@@ -8,3 +8,12 @@
 .mat-button {
   @include mat.typography-level($fonts, 'button');
 }
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.head-logo {
+  max-height: 100%;
+  cursor: pointer;
+}
