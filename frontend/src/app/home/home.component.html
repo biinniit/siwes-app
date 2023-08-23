@@ -1,3 +1,10 @@
-<div class="mat-typography">
-  <h1>Dashboard</h1>
+<div *ngIf="user; else landingPage" class="mat-typography">
+  <mat-card>
+    <mat-card-title>Dashboard</mat-card-title>
+    <mat-card-content>Hi {{ user.firstName }}! You're logged in to SIWESApp!</mat-card-content>
+  </mat-card>
 </div>
+
+<ng-template #landingPage><div class="mat-typography">
+  <h1>Welcome to SIWESApp</h1>
+</div></ng-template>

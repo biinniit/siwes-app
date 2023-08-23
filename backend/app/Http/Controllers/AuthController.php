@@ -68,9 +68,9 @@ class AuthController extends Controller
     public function getUser()
     {
         $user = Auth::user();
-        if($user->getAuthIdentifierName() === App::make('Student')->getKeyName()) {
+        if($user->getAuthIdentifierName() === (new Student)->getKeyName()) {
             return new StudentResource($user);
-        } else if($user->getAuthIdentifierName() === App::make('CompanyUser')->getKeyName()) {
+        } else if($user->getAuthIdentifierName() === (new CompanyUser)->getKeyName()) {
             return new CompanyUserResource($user);
         }
 

@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { User } from "@app/_models";
 import { config } from "@environments/environment";
 import { BehaviorSubject, Observable, of } from "rxjs";
-import { tap } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 
 import { AuthStrategy } from "./auth.strategy";
 
@@ -27,12 +27,14 @@ export class SessionAuthStrategy implements AuthStrategy<User> {
     console.log('Logout subject called');
   }
 
+  // only call if sure that user is logged in
   getCurrentUser(): Observable<User> {
     if (this.loggedUser) {
       return of(this.loggedUser);
     } else {
       return this.http
-        .get<User>(`${config.authUrl}/user`)
+        .get<any>(`${config.authUrl}/user`)
+        .pipe(map(response => response.data))
         .pipe(tap((user) => (this.loggedUser = user)));
     }
   }

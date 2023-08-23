@@ -27,6 +27,7 @@ export class AuthService {
   signup(user: Student & SignUpPassword): Observable<User> {
     return this.initCsrfProtection()
       .pipe(switchMap(() => this.http.post<any>(`${config.authUrl}/sign-up`, user)))
+      .pipe(map(response => response.data))
       .pipe(tap(data => this.auth.doLoginUser(data)));
   }
 
@@ -36,7 +37,8 @@ export class AuthService {
 
   login(loginRequest: LoginRequest): Observable<User> {
     return this.initCsrfProtection()
-      .pipe(switchMap(() => this.http.post<LoginRequest>(`${config.authUrl}/login`, loginRequest)))
+      .pipe(switchMap(() => this.http.post<any>(`${config.authUrl}/login`, loginRequest)))
+      .pipe(map(response => response.data))
       .pipe(tap(data => this.auth.doLoginUser(data)));
   }
 
@@ -58,6 +60,7 @@ export class AuthService {
       );
   }
 
+  // only call if sure that user is logged in
   getCurrentUser$(): Observable<User> {
     return this.auth.getCurrentUser();
   }
