@@ -3,16 +3,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NavigationStart, Router } from '@angular/router';
 
 import { Alert, AlertType } from './_models';
-import { AlertService, AuthService } from './_services';
+import { AlertService, AuthService, StudentService } from './_services';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [StudentService]
 })
 export class AppComponent {
   title = 'frontend';
   isLoggedIn?: boolean | null;
+  profilePictureUrl?: string | null;
 
   alert?: Alert | null;
   readonly ALERT_DURATION_SECONDS = 5;
@@ -27,9 +29,13 @@ export class AppComponent {
     private authService: AuthService,
     private alertService: AlertService,
     private _snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private studentService: StudentService
   ) {
-    this.authService.isLoggedIn$().subscribe(x => this.isLoggedIn = x);
+    this.authService.isLoggedIn$().subscribe(x => {
+      if(this.isLoggedIn = x) this.getProfilePicture()
+      else this.profilePictureUrl = null;
+    });
 
     this.alertService.onAlert().subscribe(x => {
       this.alert = x;
@@ -51,6 +57,10 @@ export class AppComponent {
         }
       }
     });
+  }
+
+  getProfilePicture() {
+    this.studentService.getProfilePictureUrl().subscribe(url => this.profilePictureUrl = url);
   }
 
   showAlert() {

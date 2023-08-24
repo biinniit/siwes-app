@@ -55,6 +55,8 @@ Route::controller(FileController::class)->group(function() {
         Route::put('/{student}/resume', 'update')->withoutScopedBindings();
         Route::delete('/{student}/resume', 'destroy')->withoutScopedBindings();
     });
+
+    Route::get('/file/{file}', 'show')->withoutScopedBindings();
 });
 
 Route::apiResources([

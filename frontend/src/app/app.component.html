@@ -3,6 +3,15 @@
   <mat-toolbar color="primary" class="mat-button">
     <a mat-flat-button routerLink="/" color="primary">Dashboard</a>
     <span class="spacer"></span>
+    <button
+      *ngIf="profilePictureUrl; else defaultProfilePicture"
+      mat-fab
+      class="profile-picture"
+      [style.backgroundImage]="'url(' + profilePictureUrl + ')'">
+    </button>
+    <ng-template #defaultProfilePicture><button mat-fab color="primary">
+      <mat-icon>account_circle</mat-icon>
+    </button></ng-template>
     <button mat-flat-button color="primary" (click)="logout()">Logout</button>
   </mat-toolbar>
 </nav>

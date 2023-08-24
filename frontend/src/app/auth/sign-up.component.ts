@@ -50,16 +50,16 @@ export class SignUpComponent {
 
   onSignUp(): void {
     this.authService.signup({
-      firstName: this.f.firstName.value ?? undefined,
+      firstName: this.f.firstName.value as string,
       middleName: this.f.middleName.value ?? undefined,
-      lastName: this.f.lastName.value ?? undefined,
-      email: this.f.email.value ?? undefined,
+      lastName: this.f.lastName.value as string,
+      email: this.f.email.value as string,
       password: this.f.password.value ?? '',
       phone: this.f.phone.value?.asNumber()
     // TODO: change to CONFIRM_PATH when implementing email confirmation
     }).subscribe({
-      next: user => {
-        console.log('Logged in user:', user);
+      next: student => {
+        console.log('Logged in user:', student);
         this.router.navigate([this.authService.INITIAL_PATH]);
       },
       error: errMessage => {

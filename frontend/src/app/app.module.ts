@@ -9,7 +9,7 @@ import { CustomTelInput } from '@components/custom-tel-input/custom-tel.input';
 import { authStrategyProvider } from '@services/auth.strategy';
 
 import { CookieInterceptor, ErrorInterceptor } from './_helpers';
-import { PermissionsService } from './_services';
+import { PermissionsService, StudentService } from './_services';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent, SignUpComponent } from './auth';

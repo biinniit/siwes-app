@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { User } from "@app/_models";
+import { ApiResponse, User } from "@app/_models";
 import { config } from "@environments/environment";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { map, tap } from "rxjs/operators";
@@ -33,7 +33,7 @@ export class SessionAuthStrategy implements AuthStrategy<User> {
       return of(this.loggedUser);
     } else {
       return this.http
-        .get<any>(`${config.authUrl}/user`)
+        .get<ApiResponse<User>>(`${config.authUrl}/user`)
         .pipe(map(response => response.data))
         .pipe(tap((user) => (this.loggedUser = user)));
     }

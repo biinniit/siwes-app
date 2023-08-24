@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { LoginRequest, SignUpPassword, Student, User } from "@app/_models";
+import { ApiResponse, LoginRequest, SignUpPassword, Student, StudentDetails, User } from "@app/_models";
 import { config } from "@environments/environment";
 import { Observable, of, switchMap } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
@@ -24,9 +24,9 @@ export class AuthService {
     @Inject(AUTH_STRATEGY) private auth: AuthStrategy<any>
   ) { }
 
-  signup(user: Student & SignUpPassword): Observable<User> {
+  signup(student: StudentDetails & SignUpPassword): Observable<Student> {
     return this.initCsrfProtection()
-      .pipe(switchMap(() => this.http.post<any>(`${config.authUrl}/sign-up`, user)))
+      .pipe(switchMap(() => this.http.post<ApiResponse<Student>>(`${config.authUrl}/sign-up`, student)))
       .pipe(map(response => response.data))
       .pipe(tap(data => this.auth.doLoginUser(data)));
   }
@@ -37,7 +37,7 @@ export class AuthService {
 
   login(loginRequest: LoginRequest): Observable<User> {
     return this.initCsrfProtection()
-      .pipe(switchMap(() => this.http.post<any>(`${config.authUrl}/login`, loginRequest)))
+      .pipe(switchMap(() => this.http.post<ApiResponse<User>>(`${config.authUrl}/login`, loginRequest)))
       .pipe(map(response => response.data))
       .pipe(tap(data => this.auth.doLoginUser(data)));
   }
